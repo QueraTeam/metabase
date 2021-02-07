@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:13.1-alpine
+    restart: always
+    volumes:
+      - db-data:${DB_DATA_DIR}
+    environment:
+      - PGDATA=${DB_DATA_DIR}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+  metabase:
+    image: metabase/metabase:v0.37.8
+    restart: always
+    environment:
+      MB_DB_TYPE: "postgres"
+      MB_DB_DBNAME: "${DB_NAME}"
+      MB_DB_PORT: "5432"
+      MB_DB_USER: "${DB_USER}"
+      MB_DB_PASS: "${DB_PASSWORD}"
+      MB_DB_HOST: "db"
+      JAVA_TIMEZONE: "${MB_JAVA_TIMEZONE}"
+    ports:
+      - 127.0.0.1:${MB_PORT}:3000
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      default:
+        ipv4_address: 172.16.200.30
+    depends_on:
+      - db
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.200.0/24"
+
+volumes:
+  db-data:
