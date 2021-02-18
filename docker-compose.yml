@@ -13,7 +13,7 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
 
   metabase:
-    image: metabase/metabase:v0.37.8
+    image: metabase/metabase:latest
     restart: always
     environment:
       MB_DB_TYPE: "postgres"
