@@ -22,6 +22,8 @@ services:
       MB_DB_USER: "${DB_USER}"
       MB_DB_PASS: "${DB_PASSWORD}"
       MB_DB_HOST: "db"
+      MB_PASSWORD_COMPLEXITY: strong
+      MB_PASSWORD_LENGTH: 10
       JAVA_TIMEZONE: "${MB_JAVA_TIMEZONE}"
     ports:
       - 127.0.0.1:${MB_PORT}:3000
