@@ -7,13 +7,13 @@ Based on official docker images for [PostgreSQL] and [Metabase].
 
 ## Usage
 
-Clone this repository, then start services locally using Docker Compose:
+- Clone this repository.
+- Copy `.env.sample` to `.env` and adjust the variables.
+- Start services locally using Docker Compose.
 
-```
-docker-compose up
-```
-
-Metabase will be available at `http://localhost:3000`.
+  ```shell
+  $ docker compose up
+  ```
 
 Metabase can connect to host (`host.docker.internal`) from static IP `172.16.200.30`,
 (static IP can be used for authentication. e.g. in `pg_hba.conf`)
